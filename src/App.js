@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state={
+      data: []
+    }
+  }
+  getInfo= async()=> {
+    const {data} = await this.$http.post("hitokoto/",{a:1,b:2})
+    this.setState({data}) 
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <button onClick={this.getInfo.bind(this)}>按钮</button>
+        <p></p>
       </div>
     );
   }
